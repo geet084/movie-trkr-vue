@@ -1,21 +1,22 @@
 <template>
-  <main id="app">
-  </main>
+  <div id="app">
+    <NavBar />
+  </div>
 </template>
 
 <script>
+import NavBar from './containers/NavBar.vue'
 
 export default {
   name: 'App',
   components: {
+    NavBar
   }
 }
 </script>
 
 <style>
-main {
-  background-color: #000;
-}
 #app {
+  background-color: #000;
 }
 </style>
