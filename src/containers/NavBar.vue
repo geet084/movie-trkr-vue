@@ -10,18 +10,11 @@
         <b-navbar-nav class="ml-auto" type="dark" variant="dark">
           
           <!-- CATEGORIES DROPDOWN MENU -->
-          <b-nav-item-dropdown class="ml-auto" :text="'Category: ' + activeCategory " type="dark" variant="dark">  
-
-            <b-dropdown-item 
-              v-for="category in this.categories"
-              :key="category"
-              :name="category.toLowerCase().split(' ').join('_')"
-              :active="activeCategory===category.toLowerCase().split(' ').join('_')"
-              @click="updateCategory"
-            >
-              {{category}}
-            </b-dropdown-item>
-          </b-nav-item-dropdown>
+          <NavDropdown 
+            :categories="categories" 
+            :activeCategory="activeCategory"
+            @clicked="updateCategory"
+          />
 
           <!-- NAVBAR LINKS -->
           <b-nav-item>Favorites</b-nav-item>
@@ -33,8 +26,13 @@
 </template>
 
 <script>
+import NavDropdown from '../components/NavDropdown.vue'
+
 export default {
   name: 'NavBar',
+  components: {
+    NavDropdown
+  },
   data() {
     return {
       categories: ['Now Playing', 'Popular', 'Top Rated', 'Upcoming'],
