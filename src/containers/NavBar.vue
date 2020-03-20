@@ -10,15 +10,16 @@
         <b-navbar-nav class="ml-auto" type="dark" variant="dark">
           
           <!-- CATEGORIES DROPDOWN MENU -->
-          <NavDropdown 
-            :categories="categories" 
+          <NavDropdown
+            :categories="categories"
             :activeCategory="activeCategory"
             @clicked="updateCategory"
           />
 
           <!-- NAVBAR LINKS -->
           <b-nav-item>Favorites</b-nav-item>
-          <b-nav-item>Login</b-nav-item>
+          
+          <Login :userInfo="userInfo" />
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -27,12 +28,15 @@
 
 <script>
 import NavDropdown from '../components/NavDropdown.vue'
+import Login from './Login.vue'
 
 export default {
   name: 'NavBar',
   components: {
-    NavDropdown
+    NavDropdown,
+    Login
   },
+  props: ['userInfo'],
   data() {
     return {
       categories: ['Now Playing', 'Popular', 'Top Rated', 'Upcoming'],
@@ -40,7 +44,7 @@ export default {
     }
   },
   methods: {
-    updateCategory: function({ target }) {
+    updateCategory({ target }) {
       this.activeCategory = target.innerText
       this.$emit('clicked', target.name)
     }
