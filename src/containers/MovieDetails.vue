@@ -2,7 +2,7 @@
   <b-card
     class="movie-card mb-4 mx-auto"
     img-alt="card img"
-    :img-src="'http://image.tmdb.org/t/p/w780'+ movie.poster_path"
+    :img-src="imgSrc"
     overlay
     tag="section"
     text-variant="white"
@@ -28,7 +28,15 @@
 <script>
 export default {
   name: 'MovieDetails',
-  props: ['movie']
+  props: ['movie'],
+  data() {
+    return {
+      imgSrc: ''
+    }
+  },
+  updated() {
+    this.imgSrc = `http://image.tmdb.org/t/p/w780${this.movie.poster_path}`
+  }
 }
 </script>
 
