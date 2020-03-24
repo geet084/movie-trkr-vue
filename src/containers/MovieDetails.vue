@@ -1,7 +1,7 @@
 <template>
   <b-card
     class="movie-card mb-4 mx-auto"
-    img-alt="card img"
+    :img-alt="movie.title"
     :img-src="imgSrc"
     overlay
     tag="section"
