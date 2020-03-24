@@ -3,7 +3,7 @@
     <NavBar @clicked="updateCategory" :userInfo="userInfo" />
     <MainDisplay 
       @handleDetails="handleMovieDetails"
-      :moviesData="moviesData" 
+      :moviesList="moviesList" 
       :movieDetails="movieDetails" 
     />
   </div>
@@ -21,7 +21,7 @@ export default {
   },
   data() {
     return {
-      moviesData: [],
+      moviesList: [],
       movieDetails: {},
       userInfo: {
         name: '',
@@ -34,23 +34,19 @@ export default {
   },
   methods: {
     updateCategory(category) {
-      const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
-      const url = `https://api.themoviedb.org/3/movie/${category}?page=1&api_key=${apiKey}&language=en-US`
-      
-      this.$http.get(url).then(res => {
-        this.moviesData = res.data.results
-      })
+      this.getMovieData('moviesList', `${category}?page=1&`)
     },
-    handleMovieDetails(val) {
-      if (isNaN(val)) this.movieDetails = {}
-      else this.getMovieDetails(val)
+    handleMovieDetails(movieId) {
+      if (isNaN(movieId)) this.movieDetails = {}
+      else this.getMovieData('movieDetails', `${movieId}?`)
     },
-    getMovieDetails(movieId) {
+    getMovieData(type, urlSegment) {
       const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
-      const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
+      const url = `https://api.themoviedb.org/3/movie/${urlSegment}api_key=${apiKey}&language=en-US`
 
       this.$http.get(url).then(res => {
-        this.movieDetails = res.data
+        if (type === 'movieDetails') this.movieDetails = res.data
+        else this.moviesList = res.data.results
       })
     }
   }

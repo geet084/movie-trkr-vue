@@ -2,7 +2,7 @@
   <main class="display">
     <b-card-group v-if="showAllMovies" deck tag="article">
       <MovieCard 
-        v-for="movie in moviesData" 
+        v-for="movie in moviesList" 
         @clicked="handleMovieDetails"
         :key="movie.title" 
         :movie="movie"
@@ -25,7 +25,7 @@ export default {
     MovieCard,
     MovieDetails
   },
-  props: ['moviesData', 'movieDetails'],
+  props: ['moviesList', 'movieDetails'],
   data() {
     return {
       showAllMovies: true
