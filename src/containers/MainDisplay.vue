@@ -9,7 +9,7 @@
       />
     </b-card-group>
 
-    <article v-else @click="exitMovieDetails">
+    <article v-else @click="handleMovieDetails">
       <MovieDetails :movie="movieDetails"/>
     </article>
   </main>
@@ -32,9 +32,6 @@ export default {
     }
   },
   methods: {
-    exitMovieDetails() {
-      this.showAllMovies = !this.showAllMovies
-    },
     handleMovieDetails(movieId) {
       this.showAllMovies = !this.showAllMovies
       this.$emit('clicked', movieId)
