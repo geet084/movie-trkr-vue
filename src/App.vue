@@ -2,7 +2,7 @@
   <div id="app">
     <NavBar @clicked="updateCategory" :userInfo="userInfo" />
     <MainDisplay 
-      @clicked="getMovieDetails" 
+      @handleDetails="handleMovieDetails"
       :moviesData="moviesData" 
       :movieDetails="movieDetails" 
     />
@@ -41,10 +41,14 @@ export default {
         this.moviesData = res.data.results
       })
     },
+    handleMovieDetails(val) {
+      if (isNaN(val)) this.movieDetails = {}
+      else this.getMovieDetails(val)
+    },
     getMovieDetails(movieId) {
       const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
       const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`
-      
+
       this.$http.get(url).then(res => {
         this.movieDetails = res.data
       })

@@ -34,7 +34,7 @@ export default {
   methods: {
     handleMovieDetails(movieId) {
       this.showAllMovies = !this.showAllMovies
-      this.$emit('clicked', movieId)
+      this.$emit('handleDetails', movieId)
     }
   }
 }
