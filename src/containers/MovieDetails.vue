@@ -18,7 +18,12 @@
       <b-card-text class="movie-stats">
         <span>{{new Date(movie.release_date).getFullYear()}}</span>
         <span>{{movie.runtime}} minutes</span>
-        <span>{{movie.vote_average}} ⭐️</span>
+        <span>{{movie.vote_average}} / 10</span>
+        <span 
+          class="star"
+          :class="{ starred: isStarred }"
+          @click.stop="toggleStarred"
+        >★</span>
       </b-card-text>
       <b-card-text>{{movie.overview}}</b-card-text>
     </b-card>
@@ -28,14 +33,20 @@
 <script>
 export default {
   name: 'MovieDetails',
-  props: ['movie'],
+  props: ['movie', 'isStarred'],
   data() {
     return {
-      imgSrc: ''
+      imgSrc: '',
     }
   },
   updated() {
     this.imgSrc = `http://image.tmdb.org/t/p/w780${this.movie.poster_path}`
+  },
+  methods: {
+    toggleStarred({ target }) {
+      const movieId = target.closest('section').id
+      this.$emit('toggleStarred', movieId)
+    }
   }
 }
 </script>
@@ -69,5 +80,17 @@ export default {
 .movie-stats {
   display: flex;
   justify-content: space-around;
+  align-items: baseline;
+}
+.star {
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+.star:hover {
+  color:red;
+}
+.starred {
+  color: yellow;
 }
 </style>
