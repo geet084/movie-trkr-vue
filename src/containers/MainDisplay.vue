@@ -4,13 +4,21 @@
       <MovieCard 
         v-for="movie in moviesList" 
         @clicked="handleMovieDetails"
+        @toggleStarred="toggleStarred"
+        :id="movie.id"
+        :isStarred="starred.includes(movie.id)"
         :key="movie.title" 
         :movie="movie"
       />
     </b-card-group>
 
     <article v-else @click="handleMovieDetails">
-      <MovieDetails :movie="movieDetails"/>
+      <MovieDetails
+        @toggleStarred="toggleStarred"
+        :id="movieDetails.id"
+        :isStarred="starred.includes(movieDetails.id)"
+        :movie="movieDetails"
+      />
     </article>
   </main>
 </template>
@@ -28,13 +36,24 @@ export default {
   props: ['moviesList', 'movieDetails'],
   data() {
     return {
-      showAllMovies: true
+      showAllMovies: true,
+      starred: []
     }
   },
   methods: {
     handleMovieDetails(movieId) {
       this.showAllMovies = !this.showAllMovies
       this.$emit('handleDetails', movieId)
+    },
+    toggleStarred(movieIdStr) {
+      const movieId = parseInt(movieIdStr)
+      let updatedList = this.starred
+      const notAlreadyStarred = !this.starred.includes(movieId)
+
+      if (notAlreadyStarred) updatedList.push(movieId)
+      else updatedList = this.starred.filter(id => id !== movieId)
+
+      this.starred = updatedList
     }
   }
 }
