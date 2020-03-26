@@ -19,7 +19,8 @@
         <span>{{new Date(movie.release_date).getFullYear()}}</span>
         <span>{{movie.runtime}} minutes</span>
         <span>{{movie.vote_average}} / 10</span>
-        <span 
+        <span
+          v-if="userInfo.name"
           class="star"
           :class="{ starred: isStarred }"
           @click.stop="toggleStarred"
@@ -33,7 +34,7 @@
 <script>
 export default {
   name: 'MovieDetails',
-  props: ['movie', 'isStarred'],
+  props: ['movie', 'isStarred', 'userInfo'],
   data() {
     return {
       imgSrc: '',
