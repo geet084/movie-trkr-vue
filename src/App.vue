@@ -4,7 +4,8 @@
     <MainDisplay 
       @handleDetails="handleMovieDetails"
       :moviesList="moviesList" 
-      :movieDetails="movieDetails" 
+      :movieDetails="movieDetails"
+      :userInfo="userInfo"
     />
   </div>
 </template>
