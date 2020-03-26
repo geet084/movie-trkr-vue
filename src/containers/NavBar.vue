@@ -19,7 +19,15 @@
           <!-- NAVBAR LINKS -->
           <b-nav-item>Favorites</b-nav-item>
           
-          <Login :userInfo="userInfo" />
+          <!-- NAVBAR LOGIN/SIGNUP & UserOptions DROPDOWN -->
+          <UserOptions 
+            v-if="userInfo.name.length"
+            :userInfo="userInfo"
+          />
+          <LoginSignup
+            v-else
+            :userInfo="userInfo"
+          />
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -28,13 +36,15 @@
 
 <script>
 import NavDropdown from '../components/NavDropdown.vue'
-import Login from './Login.vue'
+import UserOptions from '../components/UserOptions.vue'
+import LoginSignup from '../components/LoginSignup.vue'
 
 export default {
   name: 'NavBar',
   components: {
     NavDropdown,
-    Login
+    UserOptions,
+    LoginSignup
   },
   props: ['userInfo'],
   data() {
