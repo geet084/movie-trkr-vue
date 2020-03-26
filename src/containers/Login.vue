@@ -5,22 +5,32 @@
     ref="loginDropdown"
     right
   >
-    <b-dropdown-form class="login-menu">
-      <FormInput v-if="showSignUpForm" name="Name" placeholder="Jane Doe" />
-      <FormInput name="Email" placeholder="email@example.com" />
-      <FormInput name="Password" placeholder="Password" />
+    <div v-if="userInfo.name !== ''">
+      <b-dropdown-form class="signout">
+        <b-dropdown-item-button>
+          Sign Out {{userInfo.name}}
+        </b-dropdown-item-button>
+      </b-dropdown-form>
+    </div>
 
-      <b-form-checkbox class="mb-3">Remember me</b-form-checkbox>
-      <b-button variant="primary" size="sm" @click="toggleForm">
-        {{showSignUpForm ? 'Sign Up' : ' Sign In'}}
-      </b-button>
-    </b-dropdown-form>
-    <b-dropdown-divider></b-dropdown-divider>
+    <div v-else>
+      <b-dropdown-form class="login-menu">
+        <FormInput v-if="showSignUpForm" name="Name" placeholder="Jane Doe" />
+        <FormInput name="Email" placeholder="email@example.com" />
+        <FormInput name="Password" placeholder="Password" />
 
-    <b-dropdown-item-button @click="showSignUp">
-      {{showSignUpForm ? 'Already a member? Login' : 'New Around here? Sign Up'}}
-    </b-dropdown-item-button>
-    <b-dropdown-item-button v-if="!showSignUpForm">Forgot Password?</b-dropdown-item-button>
+        <b-form-checkbox class="mb-3">Remember me</b-form-checkbox>
+        <b-button variant="primary" size="sm" @click="toggleForm">
+          {{showSignUpForm ? 'Sign Up' : ' Sign In'}}
+        </b-button>
+      </b-dropdown-form>
+      <b-dropdown-divider></b-dropdown-divider>
+
+      <b-dropdown-item-button @click="showSignUp">
+        {{showSignUpForm ? 'Already a member? Login' : 'New Around here? Sign Up'}}
+      </b-dropdown-item-button>
+      <b-dropdown-item-button v-if="!showSignUpForm">Forgot Password?</b-dropdown-item-button>
+    </div>
   </b-nav-item-dropdown>
 
 </template>
