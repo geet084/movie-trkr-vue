@@ -9,6 +9,7 @@
         :isStarred="starred.includes(movie.id)"
         :key="movie.title" 
         :movie="movie"
+        :userInfo="userInfo"
       />
     </b-card-group>
 
@@ -18,6 +19,7 @@
         :id="movieDetails.id"
         :isStarred="starred.includes(movieDetails.id)"
         :movie="movieDetails"
+        :userInfo="userInfo"
       />
     </article>
   </main>
@@ -33,7 +35,7 @@ export default {
     MovieCard,
     MovieDetails
   },
-  props: ['moviesList', 'movieDetails'],
+  props: ['moviesList', 'movieDetails', 'userInfo'],
   data() {
     return {
       showAllMovies: true,
