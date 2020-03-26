@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import MovieCard from './MovieCard.vue'
-import MovieDetails from './MovieDetails.vue'
+import MovieCard from '../components/MovieCard.vue'
+import MovieDetails from '../components/MovieDetails.vue'
 
 export default {
   name: 'MainDisplay',

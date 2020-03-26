@@ -36,8 +36,8 @@
 
 <script>
 import NavDropdown from '../components/NavDropdown.vue'
-import UserOptions from '../components/UserOptions.vue'
-import LoginSignup from '../components/LoginSignup.vue'
+import UserOptions from './UserOptions.vue'
+import LoginSignup from './LoginSignup.vue'
 
 export default {
   name: 'NavBar',
