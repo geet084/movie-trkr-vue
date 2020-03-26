@@ -8,7 +8,8 @@
     overlay
     tag="section"
   >
-    <span 
+    <span
+      v-if="userInfo.name"
       class="star"
       :isStarred="isFave"
       :class="{ starred: isStarred }"
@@ -20,7 +21,7 @@
 <script>
 export default {
   name: 'MovieCard',
-  props: ['movie', 'isStarred'],
+  props: ['movie', 'isStarred', 'userInfo'],
   data() {
     return {
       isFave: false
