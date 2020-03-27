@@ -1,7 +1,7 @@
 <template>
   <b-nav-item-dropdown
     id="login-form"
-    :text="userInfo.name ? userInfo.name : 'Login'"
+    :text="showSignUpForm ? 'Signup' : 'Login'"
     ref="loginDropdown"
     right
   >
@@ -10,7 +10,7 @@
         <FormInput name="Email" placeholder="email@example.com" />
         <FormInput name="Password" placeholder="Password" />
 
-        <b-form-checkbox class="mb-3">Remember me</b-form-checkbox>
+        <b-form-checkbox class="mb-3" disabled>Remember me</b-form-checkbox>
         <b-button variant="primary" size="sm" @click="toggleForm">
           {{showSignUpForm ? 'Sign Up' : ' Sign In'}}
         </b-button>
@@ -20,7 +20,7 @@
       <b-dropdown-item-button @click="showSignUp">
         {{showSignUpForm ? 'Already a member? Login' : 'New Around here? Sign Up'}}
       </b-dropdown-item-button>
-      <b-dropdown-item-button v-if="!showSignUpForm">Forgot Password?</b-dropdown-item-button>
+      <b-dropdown-item-button v-if="!showSignUpForm" disabled>Forgot Password?</b-dropdown-item-button>
   </b-nav-item-dropdown>
 </template>
 
