@@ -23,10 +23,12 @@
           <UserOptions 
             v-if="userInfo.name.length"
             :userInfo="userInfo"
+            @signOutUser="signOutUser"
           />
           <LoginSignup
             v-else
             :userInfo="userInfo"
+            @userData="userData"
           />
         </b-navbar-nav>
       </b-collapse>
@@ -57,6 +59,12 @@ export default {
     updateCategory({ target }) {
       this.activeCategory = target.innerText
       this.$emit('clicked', target.name)
+    },
+    userData(user) {
+      this.$emit('userData', user)
+    },
+    signOutUser() {
+      this.$emit('signOutUser')
     }
   }
 }
