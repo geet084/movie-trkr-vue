@@ -1,14 +1,11 @@
 <template>
-  <b-nav-item-dropdown
-    :text="userInfo.name ? userInfo.name : 'Login'"
-    right
-  >
+  <b-nav-item-dropdown :text="userInfo.name" right>
     <b-dropdown-form class="signout">
-      <b-dropdown-item-button>
+      <b-dropdown-item-button disabled>
         Settings
       </b-dropdown-item-button>
       <b-dropdown-item-button>
-        Sign Out {{userInfo.name}}
+        Sign Out
       </b-dropdown-item-button>
     </b-dropdown-form>
   </b-nav-item-dropdown>
