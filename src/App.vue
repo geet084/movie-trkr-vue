@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <NavBar @clicked="updateCategory" :userInfo="userInfo" />
+    <NavBar 
+      @clicked="updateCategory" 
+      @signOutUser="signOutUser"
+      @userData="userData" 
+      :userInfo="userInfo" 
+    />
     <MainDisplay 
       @handleDetails="handleMovieDetails"
       :moviesList="moviesList" 
@@ -49,6 +54,15 @@ export default {
         if (type === 'movieDetails') this.movieDetails = res.data
         else this.moviesList = res.data.results
       })
+    },
+    userData(user) {
+      this.userInfo = user
+    },
+    signOutUser() {
+      this.userInfo = {
+        name: '',
+        email: ''
+      }
     }
   }
 }
