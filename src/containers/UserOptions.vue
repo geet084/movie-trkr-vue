@@ -4,7 +4,7 @@
       <b-dropdown-item-button disabled>
         Settings
       </b-dropdown-item-button>
-      <b-dropdown-item-button>
+      <b-dropdown-item-button @click="handleSignout">
         Sign Out
       </b-dropdown-item-button>
     </b-dropdown-form>
@@ -14,7 +14,12 @@
 <script>
 export default {
   name: 'UserOptions',
-  props: ['userInfo']
+  props: ['userInfo'],
+  methods: {
+    handleSignout() {
+      this.$emit('signOutUser')
+    }
+  }
 }
 </script>
 
