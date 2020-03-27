@@ -6,8 +6,11 @@
   >
     <b-form-input
       :id="'dropdown-form-' + name.toLowerCase()"
-      size="sm"
+      @input="handleChange"
       :placeholder="placeholder"
+      size="sm"
+      :type="name.toLowerCase() === 'password' ? 'password' : 'text'"
+      :value="value"
     ></b-form-input>
   </b-form-group>
 </template>
@@ -15,7 +18,13 @@
 <script>
 export default {
   name: 'FormInput',
-  props: ['name', 'placeholder']
+  props: ['name', 'placeholder', 'value'],
+  methods: {
+    handleChange(value) {
+      const target = { name: this.name.toLowerCase(), value }
+      this.$emit('inputChange', target)
+    }
+  }
 }
 </script>
 
