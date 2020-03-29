@@ -6,10 +6,11 @@
     right
   >
     <b-dropdown-form class="login-menu">
-        <FormInput v-if="showSignUpForm" name="Name" placeholder="Jane Doe" @change="handleChange" :value="this.userData.name"/>
-        <FormInput name="Email" placeholder="email@example.com" @change="handleChange" :value="this.userData.email"/>
-        <FormInput name="Password" placeholder="Password" @change="handleChange" :value="this.userData.password"/>
-
+        <FormInput v-if="showSignUpForm" name="Name" placeholder="Jane Doe" :errorMsg="this.errorMsg.name" @resetError="resetError" @change="handleChange" :value="this.userData.name"/>
+        <FormInput name="Email" placeholder="email@example.com" :errorMsg="this.errorMsg.email" @resetError="resetError" @change="handleChange" :value="this.userData.email"/>
+        <FormInput name="Password" placeholder="Password" :errorMsg="this.errorMsg.password" @resetError="resetError" @change="handleChange" :value="this.userData.password"/>
+        
+        <span v-if="errorMsg.user" class="error-message">{{errorMsg.user}}</span>
         <b-form-checkbox class="mb-3" disabled>Remember me</b-form-checkbox>
         <b-button variant="primary" size="sm" @click="submitForm">
           {{showSignUpForm ? 'Sign Up' : ' Sign In'}}
@@ -35,6 +36,12 @@ export default {
   },
   data() {
     return {
+      errorMsg: {
+        name: '',
+        email: '',
+        password: '',
+        user: ''
+      },
       showSignUpForm: false,
       userData: {
         name: '',
@@ -57,9 +64,16 @@ export default {
           email: '',
           password: ''
         }
-      }).catch(e => {
-        console.error('Login unsuccessful', e);
+      }).catch(({ response }) => {
+        const field = ['Name', 'Email', 'Password', 'User'].filter(word => (
+          response.data.message.includes(word)
+        )).pop().toLowerCase()
+        this.errorMsg[field] = response.data.message
       })
+    },
+    resetError(field) {
+      this.errorMsg[field] = ''
+      this.errorMsg.user = ''
     },
     showSignUp() {
       this.showSignUpForm = !this.showSignUpForm
@@ -75,5 +89,11 @@ export default {
 <style scoped>
 .dropdown-menu .login-menu {
   width: 245px;
+}
+.error-message {
+  position: relative;
+  top: -8px;
+  left: 3px;
+  color: red;
 }
 </style>
