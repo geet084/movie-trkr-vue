@@ -22,7 +22,7 @@ export default {
   methods: {
     handleChange(value) {
       const target = { name: this.name.toLowerCase(), value }
-      this.$emit('inputChange', target)
+      this.$emit('change', target)
     }
   }
 }
