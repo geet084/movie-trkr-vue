@@ -6,9 +6,9 @@
     right
   >
     <b-dropdown-form class="login-menu">
-        <FormInput v-if="showSignUpForm" name="Name" placeholder="Jane Doe" @inputChange="handleChange" :value="this.userData.name"/>
-        <FormInput name="Email" placeholder="email@example.com" @inputChange="handleChange" :value="this.userData.email"/>
-        <FormInput name="Password" placeholder="Password" @inputChange="handleChange" :value="this.userData.password"/>
+        <FormInput v-if="showSignUpForm" name="Name" placeholder="Jane Doe" @change="handleChange" :value="this.userData.name"/>
+        <FormInput name="Email" placeholder="email@example.com" @change="handleChange" :value="this.userData.email"/>
+        <FormInput name="Password" placeholder="Password" @change="handleChange" :value="this.userData.password"/>
 
         <b-form-checkbox class="mb-3" disabled>Remember me</b-form-checkbox>
         <b-button variant="primary" size="sm" @click="submitForm">
