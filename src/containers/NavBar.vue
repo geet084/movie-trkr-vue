@@ -17,7 +17,7 @@
           />
 
           <!-- NAVBAR LINKS -->
-          <b-nav-item>Favorites</b-nav-item>
+          <b-nav-item @click="toggleFavorites">Favorites</b-nav-item>
           
           <!-- NAVBAR LOGIN/SIGNUP & UserOptions DROPDOWN -->
           <UserOptions 
@@ -65,6 +65,9 @@ export default {
     },
     signOutUser() {
       this.$emit('signOutUser')
+    },
+    toggleFavorites() {
+      this.$emit('toggleFavorites')
     }
   }
 }
