@@ -12,7 +12,7 @@
         
         <span v-if="errorMsg.user" class="error-message">{{errorMsg.user}}</span>
         <b-form-checkbox class="mb-3" disabled>Remember me</b-form-checkbox>
-        <b-button variant="primary" size="sm" @click="submitForm">
+        <b-button variant="primary" size="sm" @click="handleSubmit">
           {{showSignUpForm ? 'Sign Up' : ' Sign In'}}
         </b-button>
       </b-dropdown-form>
@@ -51,6 +51,20 @@ export default {
     }
   },
   methods: {
+    handleChange(target) {
+      this.userData[target.name] = target.value
+    },
+    handleSubmit() {
+      this.submitForm()
+    },
+    resetError(field) {
+      this.errorMsg[field] = ''
+      this.errorMsg.user = ''
+    },
+    showSignUp() {
+      this.showSignUpForm = !this.showSignUpForm
+      this.$refs.loginDropdown.show(true)
+    },
     submitForm() {
       let url = process.env.VUE_APP_DATABASE_URL
       if (this.showSignUpForm) url += '/api/users/new'
@@ -68,19 +82,9 @@ export default {
         const field = ['Name', 'Email', 'Password', 'User'].filter(word => (
           response.data.message.includes(word)
         )).pop().toLowerCase()
+
         this.errorMsg[field] = response.data.message
       })
-    },
-    resetError(field) {
-      this.errorMsg[field] = ''
-      this.errorMsg.user = ''
-    },
-    showSignUp() {
-      this.showSignUpForm = !this.showSignUpForm
-      this.$refs.loginDropdown.show(true)
-    },
-    handleChange(target) {
-      this.userData[target.name] = target.value
     }
   }
 }
