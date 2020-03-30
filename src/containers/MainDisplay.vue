@@ -4,7 +4,7 @@
       <MovieDetails
         @toggleStarred="toggleStarred"
         :id="movieDetails.id"
-        :isStarred="starred.includes(movieDetails.id)"
+        :isStarred="favesList.find(fave => fave.id === movieDetails.id)"
         :movie="movieDetails"
         :userInfo="userInfo"
       />
@@ -16,7 +16,7 @@
         @clicked="handleMovieDetails"
         @toggleStarred="toggleStarred"
         :id="movie.id"
-        :isStarred="starred.includes(movie.id)"
+        :isStarred="favesList.find(fave => fave.id === movie.id)"
         :key="movie.title" 
         :movie="movie"
         :userInfo="userInfo"
@@ -35,7 +35,7 @@ export default {
     MovieCard,
     MovieDetails
   },
-  props: ['displayToShow', 'movieDetails', 'moviesList', 'starred', 'userInfo'],
+  props: ['displayToShow', 'favesList', 'movieDetails', 'moviesList', 'userInfo'],
   methods: {
     handleMovieDetails(movieId) {
       this.$emit('handleDetails', movieId)
