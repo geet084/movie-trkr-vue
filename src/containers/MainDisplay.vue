@@ -1,6 +1,16 @@
 <template>
   <main class="display">
-    <b-card-group v-if="showAllMovies" deck tag="article">
+    <article v-if="displayToShow === 'showDetails'" @click="handleMovieDetails">
+      <MovieDetails
+        @toggleStarred="toggleStarred"
+        :id="movieDetails.id"
+        :isStarred="starred.includes(movieDetails.id)"
+        :movie="movieDetails"
+        :userInfo="userInfo"
+      />
+    </article>
+
+    <b-card-group v-else deck tag="article">
       <MovieCard 
         v-for="movie in moviesList" 
         @clicked="handleMovieDetails"
@@ -12,16 +22,6 @@
         :userInfo="userInfo"
       />
     </b-card-group>
-
-    <article v-else @click="handleMovieDetails">
-      <MovieDetails
-        @toggleStarred="toggleStarred"
-        :id="movieDetails.id"
-        :isStarred="starred.includes(movieDetails.id)"
-        :movie="movieDetails"
-        :userInfo="userInfo"
-      />
-    </article>
   </main>
 </template>
 
@@ -35,27 +35,14 @@ export default {
     MovieCard,
     MovieDetails
   },
-  props: ['moviesList', 'movieDetails', 'userInfo'],
-  data() {
-    return {
-      showAllMovies: true,
-      starred: []
-    }
-  },
+  props: ['displayToShow', 'movieDetails', 'moviesList', 'starred', 'userInfo'],
   methods: {
     handleMovieDetails(movieId) {
-      this.showAllMovies = !this.showAllMovies
       this.$emit('handleDetails', movieId)
     },
     toggleStarred(movieIdStr) {
       const movieId = parseInt(movieIdStr)
-      let updatedList = this.starred
-      const notAlreadyStarred = !this.starred.includes(movieId)
-
-      if (notAlreadyStarred) updatedList.push(movieId)
-      else updatedList = this.starred.filter(id => id !== movieId)
-
-      this.starred = updatedList
+      this.$emit('toggleStarred', movieId)
     }
   }
 }
