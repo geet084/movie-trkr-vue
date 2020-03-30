@@ -17,7 +17,12 @@
           />
 
           <!-- NAVBAR LINKS -->
-          <b-nav-item @click="toggleFavorites">Favorites</b-nav-item>
+          <b-nav-item 
+            @click="toggleFavorites"
+            :disabled="userInfo.name === ''"
+          >
+            Favorites
+          </b-nav-item>
           
           <!-- NAVBAR LOGIN/SIGNUP & UserOptions DROPDOWN -->
           <UserOptions 
