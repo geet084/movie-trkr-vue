@@ -2,15 +2,19 @@
   <div id="app">
     <NavBar 
       @clicked="updateCategory" 
+      @toggleFavorites="toggleFavorites"
       @signOutUser="signOutUser"
       @userData="userData" 
-      :userInfo="userInfo" 
+      :userInfo="userInfo"
     />
     <MainDisplay 
       @handleDetails="handleMovieDetails"
-      :moviesList="moviesList" 
+      @toggleStarred="toggleStarred"
+      :favesList="favesList"
+      :moviesList="this.displayToShow.current === 'showAll' ? moviesList : favesList" 
       :movieDetails="movieDetails"
       :userInfo="userInfo"
+      :displayToShow="displayToShow.current"
     />
   </div>
 </template>
@@ -27,6 +31,11 @@ export default {
   },
   data() {
     return {
+      displayToShow: {
+        current: '',
+        previous: ''
+      },
+      favesList: [],
       moviesList: [],
       movieDetails: {},
       userInfo: {
@@ -39,29 +48,71 @@ export default {
     this.updateCategory('now_playing')
   },
   methods: {
-    updateCategory(category) {
-      this.getMovieData('moviesList', `${category}?page=1&`)
-    },
-    handleMovieDetails(movieId) {
-      if (isNaN(movieId)) this.movieDetails = {}
-      else this.getMovieData('movieDetails', `${movieId}?`)
-    },
-    getMovieData(type, urlSegment) {
+    getMovieData(type, selection) {
       const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
+      const urlSegment = type === 'movieDetails' ? `${selection}?` : `${selection}?page=1&`
       const url = `https://api.themoviedb.org/3/movie/${urlSegment}api_key=${apiKey}&language=en-US`
-
-      this.$http.get(url).then(res => {
-        if (type === 'movieDetails') this.movieDetails = res.data
-        else this.moviesList = res.data.results
+    
+      return this.$http.get(url).then(res => {
+        if (type === 'movieDetails') return res.data
+        else if (type === 'moviesList') return res.data.results
       })
     },
-    userData(user) {
-      this.userInfo = user
+    async handleMovieDetails(movieId) {
+      this.updateDisplay('showDetails')
+
+      if (isNaN(movieId)) this.movieDetails = {}
+      else this.movieDetails = await this.getMovieData('movieDetails', movieId)
     },
     signOutUser() {
       this.userInfo = {
         name: '',
         email: ''
+      }
+    },
+    toggleFavorites() {
+      this.updateDisplay('showFaves')
+    },
+    async toggleStarred(movieId) {
+      let movie = this.movieDetails
+
+      if (movieId !== this.movieDetails.id) {
+        movie = await this.getMovieData('movieDetails', movieId)
+      }
+
+      let updatedList = this.favesList
+      const notAlreadyStarred = !this.favesList.find(fave => fave.id === movie.id)
+      
+      if (notAlreadyStarred) updatedList.push(movie)
+      else updatedList = this.favesList.filter(fave => fave.id !== movie.id)
+
+      this.favesList = updatedList
+    },
+    async updateCategory(category) {
+      this.moviesList = await this.getMovieData('moviesList', category)
+      this.updateDisplay('showAll')
+    },
+    userData(user) {
+      this.userInfo = user
+    },
+    updateDisplay(nextDisplay) {
+      const current = this.displayToShow.current
+      const exitDetails = current === 'showDetails' && nextDisplay === 'showDetails'
+      const exitFaves = current === 'showFaves' && nextDisplay === 'showFaves'
+      
+      let updatedCurr = nextDisplay
+      let updatedPrev = current
+
+      if (exitDetails) {
+        updatedCurr = this.displayToShow.previous
+      } else if (exitFaves) {
+        updatedCurr = 'showAll'
+        updatedPrev = nextDisplay
+      }
+      
+      this.displayToShow = {
+        current: updatedCurr,
+        previous: updatedPrev
       }
     }
   }
