@@ -55,7 +55,9 @@ export default {
       this.userData[target.name] = target.value
     },
     handleSubmit() {
-      this.submitForm()
+      const formCompleted = this.verifyFormInput()
+
+      if (formCompleted) this.submitForm()
     },
     resetError(field) {
       this.errorMsg[field] = ''
@@ -85,6 +87,28 @@ export default {
 
         this.errorMsg[field] = response.data.message
       })
+    },
+    verifyFormInput() {
+      let errors = {
+        name: '',
+        email: '',
+        password: ''
+      }
+
+      const missingName = this.showSignUpForm && this.userData.name === ''
+      const missingEmail = this.userData.email === ''
+      const missingPassword = this.userData.password === ''
+      const invalidEmail = !this.userData.email.includes('@') || !this.userData.email.includes('.')
+      
+      if (missingName) errors.name = 'Name is required'
+      else if (missingEmail) errors.email = 'Email is required'
+      else if (invalidEmail) errors.email = 'Invalid email format (ex. username@domain.com)'
+      else if (missingPassword) errors.password = 'Password is required'
+      
+      this.errorMsg = {...this.errorMsg, ...errors}
+
+      const noErrors = Object.keys(errors).filter(key => errors[key] !== '').length === 0
+      return noErrors
     }
   }
 }
