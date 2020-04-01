@@ -1,16 +1,11 @@
 <template>
   <main class="display">
-    <article v-if="displayToShow === 'showDetails'" @click="handleMovieDetails">
-      <MovieDetails
-        @toggleStarred="toggleStarred"
-        :id="movieDetails.id"
-        :isStarred="favesList.find(fave => fave.id === movieDetails.id)"
-        :movie="movieDetails"
-        :userInfo="userInfo"
-      />
-    </article>
 
-    <b-card-group v-else deck tag="article">
+    <b-card-group 
+      v-if="displayToShow === 'showAll' || (displayToShow === 'showFaves' && moviesList.length > 0)" 
+      deck 
+      tag="article"
+    >
       <MovieCard 
         v-for="movie in moviesList" 
         @clicked="handleMovieDetails"
@@ -22,18 +17,39 @@
         :userInfo="userInfo"
       />
     </b-card-group>
+
+    <article v-else-if="displayToShow === 'showDetails'" @click="handleMovieDetails">
+      <MovieDetails
+        @toggleStarred="toggleStarred"
+        :id="movieDetails.id"
+        :isStarred="favesList.find(fave => fave.id === movieDetails.id)"
+        :movie="movieDetails"
+        :userInfo="userInfo"
+      />
+    </article>
+
+    <NoResults 
+      v-else-if="displayToShow === 'showFaves' && moviesList.length === 0"
+      type="faves"
+    />
+
+    <Loading v-else />
   </main>
 </template>
 
 <script>
+import Loading from '../components/Loading.vue'
 import MovieCard from '../components/MovieCard.vue'
 import MovieDetails from '../components/MovieDetails.vue'
+import NoResults from '../components/NoResults.vue'
 
 export default {
   name: 'MainDisplay',
   components: {
+    Loading,
     MovieCard,
-    MovieDetails
+    MovieDetails,
+    NoResults
   },
   props: ['displayToShow', 'favesList', 'movieDetails', 'moviesList', 'userInfo'],
   methods: {
@@ -50,6 +66,7 @@ export default {
 
 <style scoped>
 .display {
+  min-height: 100vh;
   padding: 100px 20px 20px;
 }
 
