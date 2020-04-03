@@ -3,7 +3,7 @@
 #### An application for keeping track of your favorite movies, as well as finding new ones!
 
 ## Installation Steps (Front End)
-- Clone this repo: ```git@github.com:geet084/gameflix.git```
+- Clone this repo: ```git@github.com:geet084/movie-trkr-vue.git```
 - Install dependencies: ```npm install```
 - Start Local Host 8080: ```npm run serve```
 
