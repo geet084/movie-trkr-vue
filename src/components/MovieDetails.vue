@@ -27,6 +27,7 @@
         >★</span>
       </b-card-text>
       <b-card-text>{{movie.overview}}</b-card-text>
+      <b-card-text class="genres">{{genreList}}</b-card-text>
     </b-card>
   </b-card>
 </template>
@@ -38,15 +39,24 @@ export default {
   data() {
     return {
       imgSrc: '',
+      genreList: ''
     }
   },
   updated() {
     this.imgSrc = `http://image.tmdb.org/t/p/w780${this.movie.poster_path}`
+    this.genreList = this.buildGenreList(this.movie.genres)
   },
   methods: {
     toggleStarred({ target }) {
       const movieId = target.closest('section').id
       this.$emit('toggleStarred', movieId)
+    },
+    buildGenreList(genres) {
+      let str = ''
+      genres.forEach((genre, i) => {
+        str += i === genres.length - 1 ? `${genre.name}` : `${genre.name} ⋅ `
+      })
+      return str
     }
   }
 }
@@ -82,6 +92,9 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: baseline;
+}
+.genres {
+  color: #ccc;
 }
 .star {
   font-size: 2rem;
