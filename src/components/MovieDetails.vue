@@ -52,11 +52,12 @@ export default {
       this.$emit('toggleStarred', movieId)
     },
     buildGenreList(genres) {
-      let str = ''
-      genres.forEach((genre, i) => {
-        str += i === genres.length - 1 ? `${genre.name}` : `${genre.name} ⋅ `
-      })
-      return str
+      const lastWord = genres[genres.length - 1].name
+
+      return genres.map(genre => genre.name)
+        .sort()
+        .map(word => word === lastWord ? `${word}` : `${word} ⋅ `)
+        .join('')
     }
   }
 }
