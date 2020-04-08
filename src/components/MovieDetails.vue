@@ -55,11 +55,11 @@ export default {
       this.$emit('toggleStarred', movieId)
     },
     buildGenreList(genres) {
-      const lastWord = genres[genres.length - 1].name
+      const lastWord = genres.length - 1
 
       return genres.map(genre => genre.name)
         .sort()
-        .map(word => word === lastWord ? `${word}` : `${word} ⋅ `)
+        .map((word, i) => i === lastWord ? `${word}` : `${word} ⋅ `)
         .join('')
     },
     getVideoLink(movieId) {
