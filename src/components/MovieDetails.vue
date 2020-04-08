@@ -28,6 +28,7 @@
       </b-card-text>
       <b-card-text>{{movie.overview}}</b-card-text>
       <b-card-text class="genres">{{genreList}}</b-card-text>
+      <iframe width="100%" height="220" :src="ytVideoLink" frameborder="0" allowfullscreen></iframe>
     </b-card>
   </b-card>
 </template>
@@ -39,12 +40,14 @@ export default {
   data() {
     return {
       imgSrc: '',
-      genreList: ''
+      genreList: '',
+      ytVideoLink: ''
     }
   },
   updated() {
     this.imgSrc = `http://image.tmdb.org/t/p/w780${this.movie.poster_path}`
     this.genreList = this.buildGenreList(this.movie.genres)
+    if (this.ytVideoLink === '') this.ytVideoLink = this.getVideoLink(this.movie.id)
   },
   methods: {
     toggleStarred({ target }) {
@@ -58,6 +61,15 @@ export default {
         .sort()
         .map(word => word === lastWord ? `${word}` : `${word} ⋅ `)
         .join('')
+    },
+    getVideoLink(movieId) {
+      const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
+      const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`
+      
+      this.$http.get(url).then(res => {
+        const ytId = res.data.results[0].key
+        this.ytVideoLink = `http://www.youtube-nocookie.com/embed/${ytId}`
+      })
     }
   }
 }
