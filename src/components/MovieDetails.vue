@@ -83,6 +83,9 @@ export default {
   display: flex;
   height: 90vh;
 }
+.card-body {
+  overflow: scroll;
+}
 .movie-card img {
   height: auto;
   position: fixed;
