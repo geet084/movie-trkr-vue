@@ -9,6 +9,7 @@
         <!-- RIGHT SIDE NAV BAR ELEMENTS -->
         <b-navbar-nav class="ml-auto" type="dark" variant="dark">
           
+          <SearchBar @change="handleSearch" />
           <!-- CATEGORIES DROPDOWN MENU -->
           <NavDropdown
             :categories="categories"
@@ -45,13 +46,15 @@
 import NavDropdown from '../components/NavDropdown.vue'
 import UserOptions from './UserOptions.vue'
 import LoginSignup from './LoginSignup.vue'
+import SearchBar from '../components/SearchBar.vue'
 
 export default {
   name: 'NavBar',
   components: {
     NavDropdown,
     UserOptions,
-    LoginSignup
+    LoginSignup,
+    SearchBar
   },
   props: ['userInfo'],
   data() {
@@ -61,6 +64,9 @@ export default {
     }
   },
   methods: {
+    handleSearch(searchData) {
+      this.$emit('change', searchData)
+    },
     updateCategory({ target }) {
       this.activeCategory = target.innerText
       this.$emit('clicked', target.name)
