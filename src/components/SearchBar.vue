@@ -6,7 +6,7 @@
   >
     <b-form-input
       id="dropdown-form-searchbar"
-      @input="(value) => this.$emit('change', value)"
+      @input="(value) => this.$emit('change', value.trim())"
       placeholder="Search"
       size="sm"
       type="text"
