@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <NavBar 
+    <NavBar
+      @change="handleSearch"
       @clicked="updateCategory" 
       @toggleFavorites="toggleFavorites"
       @signOutUser="signOutUser"
@@ -63,6 +64,12 @@ export default {
 
       if (isNaN(movieId)) this.movieDetails = {}
       else this.movieDetails = await this.getMovieData('movieDetails', movieId)
+    },
+    handleSearch(queryStr) {
+      const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
+      const url = `https://api.themoviedb.org/3/search/movie?query=${queryStr}&api_key=${apiKey}&language=en-US`
+    
+      if (queryStr !== '') this.$http.get(url).then(res => this.moviesList = res.data.results)
     },
     signOutUser() {
       this.userInfo = {
