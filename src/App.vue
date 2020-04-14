@@ -50,14 +50,22 @@ export default {
   },
   methods: {
     getMovieData(type, selection) {
-      const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
-      const urlSegment = type === 'movieDetails' ? `${selection}?` : `${selection}?page=1&`
-      const url = `https://api.themoviedb.org/3/movie/${urlSegment}api_key=${apiKey}&language=en-US`
+      const url = this.createUrl(type, selection)
     
       return this.$http.get(url).then(res => {
         if (type === 'movieDetails') return res.data
         else if (type === 'moviesList') return res.data.results
+        else if (type === 'search') return res.data.results
       })
+    },
+    createUrl(type, selection) {
+      const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
+      const urlPrefix = `https://api.themoviedb.org/3`
+      const urlSuffix = `api_key=${apiKey}&language=en-US`
+      
+      if (type === 'movieDetails') return urlPrefix + `/movie/${selection}?` + urlSuffix
+      else if (type === 'moviesList') return urlPrefix + `/movie/${selection}?page=1&` + urlSuffix
+      else if (type === 'search') return urlPrefix + `/search/movie?query=${selection}&` + urlSuffix
     },
     async handleMovieDetails(movieId) {
       this.updateDisplay('showDetails')
@@ -65,11 +73,8 @@ export default {
       if (isNaN(movieId)) this.movieDetails = {}
       else this.movieDetails = await this.getMovieData('movieDetails', movieId)
     },
-    handleSearch(queryStr) {
-      const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
-      const url = `https://api.themoviedb.org/3/search/movie?query=${queryStr}&api_key=${apiKey}&language=en-US`
-    
-      if (queryStr !== '') this.$http.get(url).then(res => this.moviesList = res.data.results)
+    async handleSearch(queryStr) {
+      if (queryStr !== '') this.moviesList = await this.getMovieData('search', queryStr)
     },
     signOutUser() {
       this.userInfo = {
