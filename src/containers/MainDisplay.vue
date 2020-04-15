@@ -12,7 +12,7 @@
         @toggleStarred="toggleStarred"
         :id="movie.id"
         :isStarred="favesList.find(fave => fave.id === movie.id)"
-        :key="movie.title" 
+        :key="movie.id" 
         :movie="movie"
         :userInfo="userInfo"
       />
