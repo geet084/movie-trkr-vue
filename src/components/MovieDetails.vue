@@ -81,6 +81,7 @@ export default {
   background-color: #000;
   cursor: pointer;
   display: flex;
+  font-family: 'Nunito', sans-serif;
   height: 90vh;
 }
 .card-body {

@@ -134,6 +134,5 @@ export default {
 <style>
 #app {
   background-color: #000;
-  font-family: 'Nunito', sans-serif;
 }
 </style>
