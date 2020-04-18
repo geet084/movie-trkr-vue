@@ -85,6 +85,9 @@ export default {
 </script>
 
 <style scoped>
+header {
+  font-family: 'Montserrat', sans-serif;
+}
 .nav-item {
   text-align: right;
 }
