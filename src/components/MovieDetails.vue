@@ -106,9 +106,10 @@ export default {
   z-index: 20;
 }
 .movie-stats {
-  display: flex;
-  justify-content: space-around;
   align-items: baseline;
+  display: flex;
+  font-size: .8rem;
+  justify-content: space-around;
 }
 .genres {
   color: #ccc;
