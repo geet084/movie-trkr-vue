@@ -113,6 +113,7 @@ export default {
 }
 .genres {
   color: #ccc;
+  font-size: .8rem;
 }
 .star {
   font-size: 2rem;
