@@ -110,6 +110,7 @@ export default {
   display: flex;
   font-size: .8rem;
   justify-content: space-around;
+  color: #ccc;
 }
 .genres {
   color: #ccc;
