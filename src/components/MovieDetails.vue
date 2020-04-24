@@ -107,13 +107,15 @@ export default {
 }
 .movie-stats {
   align-items: baseline;
+  color: #ccc;
   display: flex;
+  font-family: 'Montserrat', sans-serif;
   font-size: .8rem;
   justify-content: space-around;
-  color: #ccc;
 }
 .genres {
   color: #ccc;
+  font-family: 'Montserrat', sans-serif;
   font-size: .8rem;
 }
 .trailer-video {
