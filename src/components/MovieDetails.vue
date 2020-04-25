@@ -45,7 +45,7 @@ export default {
     }
   },
   updated() {
-    this.imgSrc = `http://image.tmdb.org/t/p/w780${this.movie.poster_path}`
+    this.imgSrc = `https://image.tmdb.org/t/p/w780${this.movie.poster_path}`
     this.genreList = this.buildGenreList(this.movie.genres)
     if (this.ytVideoLink === '') this.ytVideoLink = this.getVideoLink(this.movie.id)
   },
@@ -68,7 +68,7 @@ export default {
       
       this.$http.get(url).then(res => {
         const ytId = res.data.results[0].key
-        this.ytVideoLink = `http://www.youtube-nocookie.com/embed/${ytId}`
+        this.ytVideoLink = `https://www.youtube-nocookie.com/embed/${ytId}`
       })
     }
   }

@@ -3,7 +3,7 @@
     class="mb-4"
     @click="handleMovieDetails"
     :id="movie.id"
-    :img-src="'http://image.tmdb.org/t/p/w342'+ movie.poster_path"
+    :img-src="'https://image.tmdb.org/t/p/w342'+ movie.poster_path"
     :img-alt="movie.title"
     overlay
     tag="section"
