@@ -24,5 +24,6 @@ This is a Movie Tracker app where users can view popular, upcoming, and top rate
 ## Next Steps
 #### Future iterations of the project could include:
 - Adding OAuth to the login system
-- Incorporate being able to search for a movie
+- Linking their IMDB in order to rate and review movies
+- Enhance the search ability to filter by rating, genres, etc.
 
