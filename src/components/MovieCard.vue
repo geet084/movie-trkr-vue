@@ -3,7 +3,7 @@
     class="mb-4"
     @click="handleMovieDetails"
     :id="movie.id"
-    :img-src="'https://image.tmdb.org/t/p/w342'+ movie.poster_path"
+    :img-src="imgSrc"
     :img-alt="movie.title"
     overlay
     tag="section"
@@ -24,7 +24,13 @@ export default {
   props: ['movie', 'isStarred', 'userInfo'],
   data() {
     return {
-      isFave: false
+      isFave: false,
+      imgSrc: `https://image.tmdb.org/t/p/w342${this.movie.poster_path}`
+    }
+  },
+  created() {
+    if (this.movie.poster_path === null) {
+      this.imgSrc = 'https://media.comicbook.com/files/img/default-movie.png'
     }
   },
   methods: {
