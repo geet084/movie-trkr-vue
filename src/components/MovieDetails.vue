@@ -45,7 +45,11 @@ export default {
     }
   },
   updated() {
-    this.imgSrc = `https://image.tmdb.org/t/p/w780${this.movie.poster_path}`
+    if (this.movie.poster_path) {
+      this.imgSrc = `https://image.tmdb.org/t/p/w780${this.movie.poster_path}`
+    } else {
+      this.imgSrc = 'https://media.comicbook.com/files/img/default-movie.png'
+    }
     this.genreList = this.buildGenreList(this.movie.genres)
     if (this.ytVideoLink === '') this.ytVideoLink = this.getVideoLink(this.movie.id)
   },
