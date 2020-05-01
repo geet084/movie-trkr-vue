@@ -50,8 +50,9 @@ export default {
     } else {
       this.imgSrc = 'https://media.comicbook.com/files/img/default-movie.png'
     }
-    this.genreList = this.buildGenreList(this.movie.genres)
-    if (this.ytVideoLink === '') this.ytVideoLink = this.getVideoLink(this.movie.id)
+    
+    this.buildGenreList(this.movie.genres)
+    this.getVideoLink(this.movie.id)
   },
   methods: {
     toggleStarred({ target }) {
@@ -61,7 +62,7 @@ export default {
     buildGenreList(genres) {
       const lastWord = genres.length - 1
 
-      return genres.map(genre => genre.name)
+      this.genreList = genres.map(genre => genre.name)
         .sort()
         .map((word, i) => i === lastWord ? `${word}` : `${word} ⋅ `)
         .join('')
