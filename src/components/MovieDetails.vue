@@ -72,8 +72,10 @@ export default {
       const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`
       
       this.$http.get(url).then(res => {
-        const ytId = res.data.results[0].key
-        this.ytVideoLink = `https://www.youtube-nocookie.com/embed/${ytId}`
+        if (res.data.results.length) {
+          const ytId = res.data.results[0].key
+          this.ytVideoLink = `https://www.youtube-nocookie.com/embed/${ytId}`
+        }
       })
     }
   }
