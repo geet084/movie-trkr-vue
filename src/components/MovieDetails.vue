@@ -28,7 +28,7 @@
       </b-card-text>
       <b-card-text>{{movie.overview}}</b-card-text>
       <b-card-text class="genres">{{genreList}}</b-card-text>
-      <iframe class="trailer-video" width="100%" height="220" :src="ytVideoLink" frameborder="0" allowfullscreen></iframe>
+      <iframe v-if="ytVideoLink.length" class="trailer-video" width="100%" height="220" :src="ytVideoLink" frameborder="0" allowfullscreen></iframe>
     </b-card>
   </b-card>
 </template>
