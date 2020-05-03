@@ -29,6 +29,7 @@
       <b-card-text>{{movie.overview}}</b-card-text>
       <b-card-text class="genres">{{genreList}}</b-card-text>
       <iframe v-if="ytVideoLink.length" class="trailer-video" width="100%" height="220" :src="ytVideoLink" frameborder="0" allowfullscreen></iframe>
+      <b-card-text v-else class="no-trailer">Trailer Not Available</b-card-text>
     </b-card>
   </b-card>
 </template>
@@ -127,6 +128,13 @@ export default {
 }
 .trailer-video {
   box-shadow: 10px 10px 10px 0px rgba(0,0,0,.75);
+}
+.no-trailer {
+  border: .5px solid grey;
+  box-shadow: 10px 10px 10px 0px rgba(0,0,0,.75);
+  display: flex;
+  justify-content: center;
+  padding: 98px 0;
 }
 .star {
   font-size: 2rem;
