@@ -30,7 +30,7 @@ export default {
   },
   created() {
     if (this.movie.poster_path === null) {
-      this.imgSrc = 'https://media.comicbook.com/files/img/default-movie.png'
+      this.imgSrc = require('@/assets/default-movie.png')
     }
   },
   methods: {
