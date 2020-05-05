@@ -49,7 +49,7 @@ export default {
     if (this.movie.poster_path) {
       this.imgSrc = `https://image.tmdb.org/t/p/w780${this.movie.poster_path}`
     } else {
-      this.imgSrc = 'https://media.comicbook.com/files/img/default-movie.png'
+      this.imgSrc = require('@/assets/default-movie.png')
     }
     
     this.buildGenreList(this.movie.genres)
