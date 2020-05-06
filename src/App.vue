@@ -75,6 +75,7 @@ export default {
     },
     async handleSearch(queryStr) {
       if (queryStr !== '') this.moviesList = await this.getMovieData('search', queryStr)
+      else this.updateCategory('now_playing')
     },
     signOutUser() {
       this.userInfo = {
