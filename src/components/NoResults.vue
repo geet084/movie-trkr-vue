@@ -1,5 +1,9 @@
 <template>
-  <article v-if="type === 'faves'" class="no-results">
+  <article v-if="type === 'showAll'" class="no-results">
+    <h2>Uh oh...</h2>
+    <h3>No results found</h3>
+  </article>
+  <article v-else-if="type === 'faves'" class="no-results">
     <h2>Uh oh...</h2>
     <h3>You don't have any favorites yet!</h3>
     <p>Why not try adding some now?</p>
