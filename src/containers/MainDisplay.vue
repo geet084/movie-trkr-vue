@@ -1,6 +1,18 @@
 <template>
   <main class="display">
 
+    <NoResults 
+      v-if="displayToShow === 'showAll' && moviesList.length === 0"
+      type="showAll"
+    />
+    
+    <NoResults 
+      v-else-if="displayToShow === 'showFaves' && moviesList.length === 0"
+      type="faves"
+    />
+
+    <Loading v-else-if="moviesList.length === 0" />
+
     <b-card-group 
       v-if="displayToShow === 'showAll' || (displayToShow === 'showFaves' && moviesList.length > 0)" 
       deck 
@@ -27,13 +39,6 @@
         :userInfo="userInfo"
       />
     </article>
-
-    <NoResults 
-      v-else-if="displayToShow === 'showFaves' && moviesList.length === 0"
-      type="faves"
-    />
-
-    <Loading v-else />
   </main>
 </template>
 
