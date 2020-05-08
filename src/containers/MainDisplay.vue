@@ -1,20 +1,12 @@
 <template>
   <main class="display">
 
-    <NoResults 
-      v-if="displayToShow === 'showAll' && moviesList.length === 0"
-      type="showAll"
-    />
-    
-    <NoResults 
-      v-else-if="displayToShow === 'showFaves' && moviesList.length === 0"
-      type="faves"
-    />
-
-    <Loading v-else-if="moviesList.length === 0" />
+    <NoResults v-if="displayToShow === 'showAll' && zeroMovies" type="showAll" />
+    <NoResults v-else-if="displayToShow === 'showFaves' && zeroMovies" type="faves" />
+    <Loading v-else-if="zeroMovies" />
 
     <b-card-group 
-      v-if="displayToShow === 'showAll' || (displayToShow === 'showFaves' && moviesList.length > 0)" 
+      v-if="displayToShow === 'showAll' || (displayToShow === 'showFaves' && !zeroMovies)" 
       deck 
       tag="article"
     >
@@ -57,6 +49,14 @@ export default {
     NoResults
   },
   props: ['displayToShow', 'favesList', 'movieDetails', 'moviesList', 'userInfo'],
+  data() {
+    return {
+      zeroMovies: false,
+    }
+  },
+  updated() {
+    this.zeroMovies = this.$props.moviesList.length < 1
+  },
   methods: {
     handleMovieDetails(movieId) {
       this.$emit('handleDetails', movieId)
