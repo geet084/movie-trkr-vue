@@ -1,5 +1,13 @@
 <template>
-  <iframe v-if="link.length" class="trailer-video" width="100%" height="220" :src="link" frameborder="0" allowfullscreen></iframe>
+  <iframe 
+    v-if="link.length" 
+    allowfullscreen
+    class="trailer-video" 
+    frameborder="0" 
+    height="220" 
+    :src="link" 
+    width="100%" 
+  ></iframe>
   <b-card-text v-else class="no-trailer">Trailer Not Available</b-card-text>
 </template>
 
