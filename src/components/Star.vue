@@ -9,7 +9,8 @@
 
 <script>
 export default {
-  name: 'Star'
+  name: 'Star',
+  props:['isStarred', 'userInfo']
 }
 </script>
 
