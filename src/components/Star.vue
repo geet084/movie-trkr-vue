@@ -1,6 +1,6 @@
 <template>
   <span
-    v-if="userInfo.name"
+    v-if="isLoggedIn"
     class="star"
     :class="{ starred: isStarred }"
     @click.stop="toggleStarred"
@@ -10,7 +10,13 @@
 <script>
 export default {
   name: 'Star',
-  props:['isStarred', 'userInfo']
+  props:['isStarred', 'isLoggedIn'],
+  methods: {
+    toggleStarred({ target }) {
+      const movieId = target.closest('section').id
+      this.$emit('toggleStarred', movieId)
+    }
+  }
 }
 </script>
 
