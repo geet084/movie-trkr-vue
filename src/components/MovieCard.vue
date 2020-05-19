@@ -11,7 +11,7 @@
     <Star 
       @toggleStarred="toggleStarred" 
       :isLoggedIn="userInfo.name"
-      :isStarred="isFave" 
+      :isStarred="isStarred" 
     />
   </b-card>
 </template>
@@ -27,7 +27,6 @@ export default {
   },
   data() {
     return {
-      isFave: false,
       imgSrc: `https://image.tmdb.org/t/p/w342${this.movie.poster_path}`
     }
   },
@@ -42,7 +41,6 @@ export default {
       this.$emit('clicked', movieId)
     },
     toggleStarred(movieId) {
-      this.isFave = !this.isFave
       this.$emit('toggleStarred', movieId)
     }
   }
@@ -63,5 +61,4 @@ export default {
   transition: .3s ease-in-out;
   box-shadow: 0px 0px 5px 2px rgba(255, 255, 255, 0.6);
 }
-/*  */
 </style>
