@@ -11,7 +11,8 @@
     <Star 
       @toggleStarred="toggleStarred" 
       :isLoggedIn="userInfo.name"
-      :isStarred="isStarred" 
+      :isStarred="isStarred"
+      type="cardStar"
     />
   </b-card>
 </template>
