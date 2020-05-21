@@ -19,12 +19,12 @@
         <span>{{new Date(movie.release_date).getFullYear()}}</span>
         <span>{{movie.runtime}} minutes</span>
         <span>{{movie.vote_average}} / 10</span>
-        <span
-          v-if="userInfo.name"
-          class="star"
-          :class="{ starred: isStarred }"
-          @click.stop="toggleStarred"
-        >★</span>
+        <Star 
+          @toggleStarred="toggleStarred" 
+          :isLoggedIn="userInfo.name"
+          :isStarred="isStarred"
+          type="detailsStar"
+        />
       </b-card-text>
       <b-card-text>{{movie.overview}}</b-card-text>
       <b-card-text class="genres">{{genreList}}</b-card-text>
@@ -34,12 +34,14 @@
 </template>
 
 <script>
+import Star from '../components/Star.vue'
 import Trailer from '../components/Trailer.vue'
 
 export default {
   name: 'MovieDetails',
   props: ['movie', 'isStarred', 'userInfo'],
   components: {
+    Star,
     Trailer
   },
   data() {
@@ -60,8 +62,7 @@ export default {
     this.getVideoLink(this.movie.id)
   },
   methods: {
-    toggleStarred({ target }) {
-      const movieId = target.closest('section').id
+    toggleStarred(movieId) {
       this.$emit('toggleStarred', movieId)
     },
     buildGenreList(genres) {
@@ -129,16 +130,5 @@ export default {
   color: #ccc;
   font-family: 'Montserrat', sans-serif;
   font-size: .8rem;
-}
-.star {
-  font-size: 2rem;
-  color: #fff;
-  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-}
-.star:hover {
-  color:red;
-}
-.starred {
-  color: yellow;
 }
 </style>
