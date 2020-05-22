@@ -1,7 +1,13 @@
 <template>
   <span
-    v-if="isLoggedIn"
-    class="star"
+    v-if="type === 'cardStar' && isLoggedIn"
+    class="cardStar"
+    :class="{ starred: isStarred }"
+    @click.stop="toggleStarred"
+  >★</span>
+  <span
+    v-else-if="type === 'detailsStar' && isLoggedIn"
+    class="detailsStar"
     :class="{ starred: isStarred }"
     @click.stop="toggleStarred"
   >★</span>
@@ -10,7 +16,7 @@
 <script>
 export default {
   name: 'Star',
-  props:['isStarred', 'isLoggedIn'],
+  props:['isStarred', 'isLoggedIn', 'type'],
   methods: {
     toggleStarred({ target }) {
       const movieId = target.closest('section').id
@@ -21,13 +27,16 @@ export default {
 </script>
 
 <style scoped>
-.star {
+.cardStar {
   font-size: 2.5rem;
   position: relative;
   top: -15px;
   left: 235px;
   color: #fff;
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+.detailsStar {
+  font-size: 2rem;
 }
 .starred {
   color: yellow;
