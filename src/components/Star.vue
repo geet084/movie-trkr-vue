@@ -30,6 +30,7 @@ export default {
 .star {
   color: #fff;
   text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  font-family: 'Jua', sans-serif;
 }
 .cardStar {
   font-size: 2.5rem;
