@@ -15,17 +15,12 @@
       variant="dark" 
     ></b-overlay>
     <b-card class="overlay-info" :title="movie.title">
-      <b-card-text class="movie-stats">
-        <span>{{new Date(movie.release_date).getFullYear()}}</span>
-        <span>{{movie.runtime}} minutes</span>
-        <span>{{movie.vote_average}} / 10</span>
-        <Star 
-          @toggleStarred="toggleStarred" 
-          :isLoggedIn="userInfo.name"
-          :isStarred="isStarred"
-          type="detailsStar"
-        />
-      </b-card-text>
+      <MovieStats 
+        @toggleStarred="toggleStarred" 
+        :isLoggedIn="userInfo.name" 
+        :isStarred="isStarred" 
+        :movie="movie"
+      />
       <b-card-text>{{movie.overview}}</b-card-text>
       <b-card-text class="genres">{{genreList}}</b-card-text>
       <Trailer :link="ytVideoLink" />
@@ -34,14 +29,14 @@
 </template>
 
 <script>
-import Star from '../components/Star.vue'
+import MovieStats from '../components/MovieStats.vue'
 import Trailer from '../components/Trailer.vue'
 
 export default {
   name: 'MovieDetails',
   props: ['movie', 'isStarred', 'userInfo'],
   components: {
-    Star,
+    MovieStats,
     Trailer
   },
   data() {
@@ -117,14 +112,6 @@ export default {
   border: none;
   margin: -1.7rem;
   z-index: 20;
-}
-.movie-stats {
-  align-items: baseline;
-  color: #ccc;
-  display: flex;
-  font-family: 'Montserrat', sans-serif;
-  font-size: .8rem;
-  justify-content: space-around;
 }
 .genres {
   color: #ccc;
