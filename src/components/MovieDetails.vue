@@ -22,13 +22,14 @@
         :movie="movie"
       />
       <b-card-text>{{movie.overview}}</b-card-text>
-      <b-card-text class="genres">{{genreList}}</b-card-text>
+      <MovieGenres v-if="this.movie.poster_path" :movieGenres="movie.genres" />
       <Trailer :link="ytVideoLink" />
     </b-card>
   </b-card>
 </template>
 
 <script>
+import MovieGenres from '../components/MovieGenres.vue'
 import MovieStats from '../components/MovieStats.vue'
 import Trailer from '../components/Trailer.vue'
 
@@ -36,6 +37,7 @@ export default {
   name: 'MovieDetails',
   props: ['movie', 'isStarred', 'userInfo'],
   components: {
+    MovieGenres,
     MovieStats,
     Trailer
   },
@@ -53,20 +55,11 @@ export default {
       this.imgSrc = require('@/assets/default-movie.png')
     }
     
-    this.buildGenreList(this.movie.genres)
     this.getVideoLink(this.movie.id)
   },
   methods: {
     toggleStarred(movieId) {
       this.$emit('toggleStarred', movieId)
-    },
-    buildGenreList(genres) {
-      const lastWord = genres.length - 1
-
-      this.genreList = genres.map(genre => genre.name)
-        .sort()
-        .map((word, i) => i === lastWord ? `${word}` : `${word} ⋅ `)
-        .join('')
     },
     getVideoLink(movieId) {
       const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
@@ -112,10 +105,5 @@ export default {
   border: none;
   margin: -1.7rem;
   z-index: 20;
-}
-.genres {
-  color: #ccc;
-  font-family: 'Montserrat', sans-serif;
-  font-size: .8rem;
 }
 </style>
