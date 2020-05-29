@@ -90,7 +90,10 @@ export default {
 }
 .movie-card img {
   height: auto;
+  left: 0;
+  margin: 0 auto;
   position: fixed;
+  right: 0;
   width: 53vh;
 }
 .card-img-overlay {
