@@ -15,6 +15,16 @@ Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
+const store = new Vuex.Store({
+  state: {
+    userInfo: {
+      name: '',
+      email: ''
+    }
+  }
+})
+
 new Vue({
+  store: store,
   render: h => h(App),
 }).$mount('#app')
