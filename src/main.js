@@ -21,6 +21,14 @@ const store = new Vuex.Store({
       name: '',
       email: ''
     }
+  },
+  mutations: {
+    signOutUser: state => {
+      state.userInfo = {
+        name: '',
+        email: ''
+      }
+    }
   }
 })
 
