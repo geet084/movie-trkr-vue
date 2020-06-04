@@ -30,6 +30,11 @@ export default {
     NavBar,
     MainDisplay
   },
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo
+    }
+  },
   data() {
     return {
       displayToShow: {
@@ -39,10 +44,6 @@ export default {
       favesList: [],
       moviesList: [],
       movieDetails: {},
-      userInfo: {
-        name: '',
-        email: ''
-      }
     }
   },
   mounted() {
@@ -78,10 +79,7 @@ export default {
       else this.updateCategory('now_playing')
     },
     signOutUser() {
-      this.userInfo = {
-        name: '',
-        email: ''
-      }
+      this.$store.commit('signOutUser')
     },
     toggleFavorites() {
       this.updateDisplay('showFaves')
