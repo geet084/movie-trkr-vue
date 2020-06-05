@@ -4,9 +4,7 @@
       @change="handleSearch"
       @clicked="updateCategory" 
       @toggleFavorites="toggleFavorites"
-      @signOutUser="signOutUser"
       @userData="userData" 
-      :userInfo="userInfo"
     />
     <MainDisplay 
       @handleDetails="handleMovieDetails"
@@ -14,7 +12,6 @@
       :favesList="favesList"
       :moviesList="this.displayToShow.current === 'showAll' ? moviesList : favesList" 
       :movieDetails="movieDetails"
-      :userInfo="userInfo"
       :displayToShow="displayToShow.current"
     />
   </div>
@@ -29,11 +26,6 @@ export default {
   components: {
     NavBar,
     MainDisplay
-  },
-  computed: {
-    userInfo() {
-      return this.$store.state.userInfo
-    }
   },
   data() {
     return {
@@ -77,9 +69,6 @@ export default {
     async handleSearch(queryStr) {
       if (queryStr !== '') this.moviesList = await this.getMovieData('search', queryStr)
       else this.updateCategory('now_playing')
-    },
-    signOutUser() {
-      this.$store.commit('signOutUser')
     },
     toggleFavorites() {
       this.updateDisplay('showFaves')
