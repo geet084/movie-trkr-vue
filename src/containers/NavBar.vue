@@ -56,7 +56,11 @@ export default {
     LoginSignup,
     SearchBar
   },
-  props: ['userInfo'],
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo
+    }
+  },
   data() {
     return {
       categories: ['Now Playing', 'Popular', 'Top Rated', 'Upcoming'],
@@ -75,7 +79,7 @@ export default {
       this.$emit('userData', user)
     },
     signOutUser() {
-      this.$emit('signOutUser')
+      this.$store.commit('signOutUser')
     },
     toggleFavorites() {
       this.$emit('toggleFavorites')
