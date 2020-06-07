@@ -48,7 +48,12 @@ export default {
     MovieDetails,
     NoResults
   },
-  props: ['displayToShow', 'favesList', 'movieDetails', 'moviesList', 'userInfo'],
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo
+    }
+  },
+  props: ['displayToShow', 'favesList', 'movieDetails', 'moviesList'],
   data() {
     return {
       zeroMovies: false,
