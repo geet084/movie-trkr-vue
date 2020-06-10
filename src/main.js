@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vuex from 'vuex'
 import 'es6-promise/auto'
+import { store } from './store/store.js'
 
 Vue.config.productionTip = false
 
@@ -14,23 +15,6 @@ Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
-
-const store = new Vuex.Store({
-  state: {
-    userInfo: {
-      name: '',
-      email: ''
-    }
-  },
-  mutations: {
-    signOutUser: state => {
-      state.userInfo = {
-        name: '',
-        email: ''
-      }
-    }
-  }
-})
 
 new Vue({
   store: store,
