@@ -31,11 +31,7 @@
             :userInfo="userInfo"
             @signOutUser="signOutUser"
           />
-          <LoginSignup
-            v-else
-            :userInfo="userInfo"
-            @userData="userData"
-          />
+          <LoginSignup v-else />
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -74,9 +70,6 @@ export default {
     updateCategory({ target }) {
       this.activeCategory = target.innerText
       this.$emit('clicked', target.name)
-    },
-    userData(user) {
-      this.$emit('userData', user)
     },
     signOutUser() {
       this.$store.commit('signOutUser')
