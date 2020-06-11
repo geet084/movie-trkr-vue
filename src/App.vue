@@ -4,7 +4,6 @@
       @change="handleSearch"
       @clicked="updateCategory" 
       @toggleFavorites="toggleFavorites"
-      @userData="userData" 
     />
     <MainDisplay 
       @handleDetails="handleMovieDetails"
@@ -91,9 +90,6 @@ export default {
     async updateCategory(category) {
       this.moviesList = await this.getMovieData('moviesList', category)
       this.updateDisplay('showAll')
-    },
-    userData(user) {
-      this.userInfo = user
     },
     updateDisplay(nextDisplay) {
       const current = this.displayToShow.current
