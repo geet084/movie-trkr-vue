@@ -30,7 +30,6 @@ import FormInput from '../components/FormInput.vue'
 
 export default {
   name: 'LoginSignup',
-  props: ['userInfo'],
   components: {
     FormInput
   },
@@ -73,7 +72,7 @@ export default {
       else url += '/api/users/login'
       
       this.$http.post(url, this.userData).then(res => {
-        this.$emit('userData', res.data)
+        this.$store.commit('signInUser', res.data)
         this.$refs.loginDropdown.hide(true)
         this.userData = {
           name: '',
