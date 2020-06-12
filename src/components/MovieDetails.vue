@@ -35,11 +35,16 @@ import Trailer from '../components/Trailer.vue'
 
 export default {
   name: 'MovieDetails',
-  props: ['movie', 'isStarred', 'userInfo'],
+  props: ['movie', 'isStarred'],
   components: {
     MovieGenres,
     MovieStats,
     Trailer
+  },
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo
+    }
   },
   data() {
     return {
