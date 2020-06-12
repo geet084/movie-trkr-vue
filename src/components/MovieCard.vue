@@ -22,9 +22,14 @@ import Star from '../components/Star.vue'
 
 export default {
   name: 'MovieCard',
-  props: ['movie', 'isStarred', 'userInfo'],
+  props: ['movie', 'isStarred'],
   components: {
     Star
+  },
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo
+    }
   },
   data() {
     return {
