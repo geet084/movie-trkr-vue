@@ -26,11 +26,7 @@
           </b-nav-item>
           
           <!-- NAVBAR LOGIN/SIGNUP & UserOptions DROPDOWN -->
-          <UserOptions 
-            v-if="userInfo.name.length"
-            :userInfo="userInfo"
-            @signOutUser="signOutUser"
-          />
+          <UserOptions v-if="userInfo.name.length" />
           <LoginSignup v-else />
         </b-navbar-nav>
       </b-collapse>
@@ -70,9 +66,6 @@ export default {
     updateCategory({ target }) {
       this.activeCategory = target.innerText
       this.$emit('clicked', target.name)
-    },
-    signOutUser() {
-      this.$store.commit('signOutUser')
     },
     toggleFavorites() {
       this.$emit('toggleFavorites')
