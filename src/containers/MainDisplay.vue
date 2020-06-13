@@ -18,7 +18,6 @@
         :isStarred="favesList.find(fave => fave.id === movie.id)"
         :key="movie.id" 
         :movie="movie"
-        :userInfo="userInfo"
       />
     </b-card-group>
 
@@ -28,7 +27,6 @@
         :id="movieDetails.id"
         :isStarred="favesList.find(fave => fave.id === movieDetails.id)"
         :movie="movieDetails"
-        :userInfo="userInfo"
       />
     </article>
   </main>
@@ -47,11 +45,6 @@ export default {
     MovieCard,
     MovieDetails,
     NoResults
-  },
-  computed: {
-    userInfo() {
-      return this.$store.state.userInfo
-    }
   },
   props: ['displayToShow', 'favesList', 'movieDetails', 'moviesList'],
   data() {
