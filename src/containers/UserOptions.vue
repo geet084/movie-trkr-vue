@@ -14,10 +14,14 @@
 <script>
 export default {
   name: 'UserOptions',
-  props: ['userInfo'],
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo
+    }
+  },
   methods: {
     handleSignout() {
-      this.$emit('signOutUser')
+      this.$store.commit('signOutUser')
     }
   }
 }
