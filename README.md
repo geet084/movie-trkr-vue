@@ -22,6 +22,7 @@ This is a Movie Tracker app where users can view popular, upcoming, and top rate
 
 ## Primary Technologies Used
 - Vue
+- Vuex
 - Bootstrap
 - The Movie Database API
 - Heroku
