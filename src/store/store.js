@@ -9,7 +9,10 @@ export const store = new Vuex.Store({
     userInfo: {
       name: '',
       email: ''
-    }
+    },
+    favesList: [],
+    moviesList: [],
+    movieDetails: {}
   },
   mutations: {
     signInUser: (state, user) => {
