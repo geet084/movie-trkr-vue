@@ -23,7 +23,13 @@ export const store = new Vuex.Store({
         name: '',
         email: ''
       }
-    }
+    },
+    setMovieDetails: (state, movieDetails) => {
+      state.movieDetails = movieDetails
+    },
+    setMoviesList: (state, moviesList) => {
+      state.moviesList = moviesList
+    },
   },
   actions
 })
