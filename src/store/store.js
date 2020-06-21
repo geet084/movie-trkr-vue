@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { actions } from './actions'
+import { mutations } from './mutations'
 
 Vue.use(Vuex)
 
@@ -14,22 +15,6 @@ export const store = new Vuex.Store({
     moviesList: [],
     movieDetails: {}
   },
-  mutations: {
-    signInUser: (state, user) => {
-      state.userInfo = user
-    },
-    signOutUser: state => {
-      state.userInfo = {
-        name: '',
-        email: ''
-      }
-    },
-    setMovieDetails: (state, movieDetails) => {
-      state.movieDetails = movieDetails
-    },
-    setMoviesList: (state, moviesList) => {
-      state.moviesList = moviesList
-    },
-  },
+  mutations,
   actions
 })
