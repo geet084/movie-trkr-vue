@@ -14,7 +14,8 @@ export const store = new Vuex.Store({
     favesList: [],
     moviesList: [],
     movieDetails: {},
-    searchQuery: ''
+    searchQuery: '',
+    movieCategory: ''
   },
   mutations,
   actions
