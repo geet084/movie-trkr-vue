@@ -13,7 +13,8 @@ export const store = new Vuex.Store({
     },
     favesList: [],
     moviesList: [],
-    movieDetails: {}
+    movieDetails: {},
+    searchQuery: ''
   },
   mutations,
   actions
