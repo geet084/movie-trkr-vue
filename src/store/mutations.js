@@ -13,5 +13,8 @@ export const mutations = {
   },
   setMoviesList: (state, moviesList) => {
     state.moviesList = moviesList
+  },
+  setSearchQuery: (state, searchQuery) => {
+    state.searchQuery = searchQuery
   }
 }
