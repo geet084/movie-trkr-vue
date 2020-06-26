@@ -16,5 +16,8 @@ export const mutations = {
   },
   setSearchQuery: (state, searchQuery) => {
     state.searchQuery = searchQuery
+  },
+  setCategory: (state, category) => {
+    state.category = category
   }
 }
