@@ -9,7 +9,7 @@
         <!-- RIGHT SIDE NAV BAR ELEMENTS -->
         <b-navbar-nav class="ml-auto" type="dark" variant="dark">
           
-          <SearchBar @change="handleSearch" />
+          <SearchBar />
           <!-- CATEGORIES DROPDOWN MENU -->
           <NavDropdown
             :categories="categories"
@@ -60,9 +60,6 @@ export default {
     }
   },
   methods: {
-    handleSearch(searchData) {
-      this.$emit('change', searchData)
-    },
     updateCategory({ target }) {
       this.activeCategory = target.innerText
       this.$emit('clicked', target.name)
