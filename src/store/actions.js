@@ -9,6 +9,10 @@ export const actions = {
       else if (type === 'moviesList') commit('setMoviesList', res.data.results)
       else if (type === 'search') commit('setMoviesList', res.data.results)
     })
+  },
+  handleSearch({ commit }, queryStr) {
+    if (queryStr !== '') commit('setSearchQuery', queryStr)
+    else commit('setCategory', 'now_playing')
   }
 }
 
