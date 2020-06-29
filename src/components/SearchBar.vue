@@ -6,7 +6,7 @@
   >
     <b-form-input
       id="dropdown-form-searchbar"
-      @input="(value) => this.$emit('change', value.trim())"
+      @input="(value) => handleSearch(value.trim())"
       placeholder="Search"
       size="sm"
       type="text"
@@ -18,7 +18,17 @@
 <script>
 export default {
   name: 'SearchBar',
-  props: ['value']
+  computed: {
+    value() {
+      return this.$store.state.searchQuery
+    }
+  },
+  methods: {
+    handleSearch(queryStr) {
+      const payload = { type: 'search', selection: queryStr }
+      this.$store.dispatch('handleSearch', payload)
+    }
+  }
 }
 </script>
 
