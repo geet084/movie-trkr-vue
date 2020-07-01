@@ -62,7 +62,9 @@ export default {
   methods: {
     updateCategory({ target }) {
       this.activeCategory = target.innerText
-      this.$emit('clicked', target.name)
+      
+      const payload = { type: 'moviesList', selection: target.name }
+      this.$store.dispatch('getMovieData', payload)
     },
     toggleFavorites() {
       this.$emit('toggleFavorites')
