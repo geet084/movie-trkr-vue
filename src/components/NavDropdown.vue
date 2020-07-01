@@ -22,7 +22,7 @@ export default {
   name: 'NavDropdown',
   props: ['categories', 'activeCategory'],
   methods: {
-    updateCategory: function(event) {
+    updateCategory(event) {
       this.$emit('clicked', event)
     }
   }
