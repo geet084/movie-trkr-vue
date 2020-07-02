@@ -15,7 +15,11 @@ export const store = new Vuex.Store({
     moviesList: [],
     movieDetails: {},
     searchQuery: '',
-    movieCategory: ''
+    movieCategory: '',
+    displayToShow: {
+      current: '',
+      previous: ''
+    }
   },
   mutations,
   actions
