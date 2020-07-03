@@ -13,6 +13,10 @@ export const actions = {
   handleSearch({ commit }, queryStr) {
     if (queryStr !== '') commit('setSearchQuery', queryStr)
     else commit('setCategory', 'now_playing')
+  },
+  updateCategory({ commit }, category) {
+    commit('setCategory', category)
+    commit('setDisplay', 'showAll')
   }
 }
 
