@@ -19,5 +19,26 @@ export const mutations = {
   },
   setCategory: (state, category) => {
     state.category = category
+  },
+  setDisplay: (state, nextDisplay) => {
+    const current = state.displayToShow.current
+    const exitDetails = current === 'showDetails' && nextDisplay === 'showDetails'
+    const exitFaves = current === 'showFaves' && nextDisplay === 'showFaves'
+
+    let updatedCurr = nextDisplay
+    let updatedPrev = current
+
+    if (exitDetails) {
+      updatedCurr = this.displayToShow.previous
+    } else if (exitFaves) {
+      updatedCurr = 'showAll'
+      updatedPrev = nextDisplay
+    }
+
+    state.displayToShow = {
+      current: updatedCurr,
+      previous: updatedPrev
+    }
+
   }
 }
