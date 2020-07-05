@@ -17,6 +17,9 @@ export const actions = {
   updateCategory({ commit }, category) {
     commit('setCategory', category)
     commit('setDisplay', 'showAll')
+  },
+  handleDetails({ commit }) {
+    commit('setDisplay', 'showDetails')
   }
 }
 
