@@ -29,7 +29,7 @@ export const mutations = {
     let updatedPrev = current
 
     if (exitDetails) {
-      updatedCurr = this.displayToShow.previous
+      updatedCurr = state.displayToShow.previous
     } else if (exitFaves) {
       updatedCurr = 'showAll'
       updatedPrev = nextDisplay
@@ -39,6 +39,5 @@ export const mutations = {
       current: updatedCurr,
       previous: updatedPrev
     }
-
   }
 }
