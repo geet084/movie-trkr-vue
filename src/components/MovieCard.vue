@@ -44,7 +44,12 @@ export default {
   methods: {
     handleMovieDetails({ target }) {
       const movieId = target.closest('section').id
-      this.$emit('clicked', movieId)
+
+      if(!isNaN(movieId)) {
+        const payload = { type: 'movieDetails', selection: movieId }
+        this.$store.dispatch('handleDetails')
+        this.$store.dispatch('getMovieData', payload)
+      }
     },
     toggleStarred(movieId) {
       this.$emit('toggleStarred', movieId)
