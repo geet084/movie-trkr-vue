@@ -1,6 +1,7 @@
 <template>
   <b-card
     class="movie-card mb-4 mx-auto"
+    @click="handleMovieDetails"
     :img-alt="movie.title"
     :img-src="imgSrc"
     overlay
@@ -63,6 +64,10 @@ export default {
     this.getVideoLink(this.movie.id)
   },
   methods: {
+    handleMovieDetails() {
+      this.$store.dispatch('handleDetails')
+      this.$store.dispatch('resetDetails')
+    },
     toggleStarred(movieId) {
       this.$emit('toggleStarred', movieId)
     },
