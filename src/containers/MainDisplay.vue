@@ -11,8 +11,7 @@
       tag="article"
     >
       <MovieCard 
-        v-for="movie in moviesList" 
-        @clicked="handleMovieDetails"
+        v-for="movie in moviesList"
         @toggleStarred="toggleStarred"
         :id="movie.id"
         :isStarred="favesList.find(fave => fave.id === movie.id)"
@@ -21,7 +20,7 @@
       />
     </b-card-group>
 
-    <article v-else-if="displayToShow === 'showDetails'" @click="handleMovieDetails">
+    <article v-else-if="displayToShow === 'showDetails'">
       <MovieDetails
         @toggleStarred="toggleStarred"
         :id="movieDetails.id"
@@ -56,9 +55,6 @@ export default {
     this.zeroMovies = this.$props.moviesList.length < 1
   },
   methods: {
-    handleMovieDetails(movieId) {
-      this.$emit('handleDetails', movieId)
-    },
     toggleStarred(movieIdStr) {
       const movieId = parseInt(movieIdStr)
       this.$emit('toggleStarred', movieId)
