@@ -20,6 +20,9 @@ export const actions = {
   },
   handleDetails({ commit }) {
     commit('setDisplay', 'showDetails')
+  },
+  resetDetails({ commit }) {
+    commit('setMovieDetails', {})
   }
 }
 
