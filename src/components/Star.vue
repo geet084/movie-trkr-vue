@@ -20,7 +20,7 @@ export default {
   methods: {
     toggleStarred({ target }) {
       const movieId = target.closest('section').id
-      this.$emit('toggleStarred', movieId)
+      this.$store.dispatch('toggleStarred', movieId)
     }
   }
 }
