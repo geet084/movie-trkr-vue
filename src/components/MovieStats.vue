@@ -4,7 +4,6 @@
     <span>{{movie.runtime}} minutes</span>
     <span>{{movie.vote_average}} / 10</span>
     <Star 
-      @toggleStarred="toggleStarred" 
       :isLoggedIn="isLoggedIn"
       :isStarred="isStarred"
       type="detailsStar"
@@ -20,11 +19,6 @@ export default {
   props: ['movie', 'isStarred', 'isLoggedIn'],
   components: {
     Star
-  },
-  methods: {
-    toggleStarred(movieId) {
-      this.$emit('toggleStarred', movieId)
-    }
   }
 }
 </script>
