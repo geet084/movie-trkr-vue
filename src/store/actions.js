@@ -23,6 +23,9 @@ export const actions = {
   },
   resetDetails({ commit }) {
     commit('setMovieDetails', {})
+  },
+  toggleStarred({ commit }, movieId) {
+    commit('toggleStarredMovie', movieId)
   }
 }
 
