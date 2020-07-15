@@ -17,7 +17,6 @@
     ></b-overlay>
     <b-card class="overlay-info" :title="movie.title">
       <MovieStats 
-        @toggleStarred="toggleStarred" 
         :isLoggedIn="userInfo.name" 
         :isStarred="isStarred" 
         :movie="movie"
@@ -67,9 +66,6 @@ export default {
     handleMovieDetails() {
       this.$store.dispatch('handleDetails')
       this.$store.dispatch('resetDetails')
-    },
-    toggleStarred(movieId) {
-      this.$emit('toggleStarred', movieId)
     },
     getVideoLink(movieId) {
       const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
