@@ -19,7 +19,7 @@ export default {
   props:['isStarred', 'isLoggedIn', 'type'],
   methods: {
     toggleStarred({ target }) {
-      const movieId = target.closest('section').id
+      const movieId = parseInt(target.closest('section').id)
       this.$store.dispatch('toggleStarred', movieId)
     }
   }
