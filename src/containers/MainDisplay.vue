@@ -12,7 +12,6 @@
     >
       <MovieCard 
         v-for="movie in moviesList"
-        @toggleStarred="toggleStarred"
         :id="movie.id"
         :isStarred="favesList.find(fave => fave.id === movie.id)"
         :key="movie.id" 
@@ -22,7 +21,6 @@
 
     <article v-else-if="displayToShow === 'showDetails'">
       <MovieDetails
-        @toggleStarred="toggleStarred"
         :id="movieDetails.id"
         :isStarred="favesList.find(fave => fave.id === movieDetails.id)"
         :movie="movieDetails"
@@ -53,12 +51,6 @@ export default {
   },
   updated() {
     this.zeroMovies = this.$props.moviesList.length < 1
-  },
-  methods: {
-    toggleStarred(movieIdStr) {
-      const movieId = parseInt(movieIdStr)
-      this.$emit('toggleStarred', movieId)
-    }
   }
 }
 </script>
