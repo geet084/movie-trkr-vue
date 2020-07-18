@@ -39,5 +39,15 @@ export const mutations = {
       current: updatedCurr,
       previous: updatedPrev
     }
+  },
+  toggleStarredMovie: (state, movieId) => {
+    let movie = state.movieDetails
+    let updatedList = state.favesList
+    const notAlreadyStarred = !state.favesList.find(fave => fave.id === movieId)
+
+    if (notAlreadyStarred) updatedList.push(movie)
+    else updatedList = state.favesList.filter(fave => fave.id !== parseInt(movieId))
+
+    state.favesList = updatedList
   }
 }
