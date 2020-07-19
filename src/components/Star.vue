@@ -17,6 +17,11 @@
 export default {
   name: 'Star',
   props:['isStarred', 'isLoggedIn', 'type'],
+  computed: {
+    movieDetails() {
+      return this.$store.state.movieDetails
+    }
+  },
   methods: {
     toggleStarred({ target }) {
       const movieId = parseInt(target.closest('section').id)
