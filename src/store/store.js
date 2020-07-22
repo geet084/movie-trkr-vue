@@ -2,25 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { actions } from './actions'
 import { mutations } from './mutations'
+import { state } from './state'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
-  state: {
-    userInfo: {
-      name: '',
-      email: ''
-    },
-    favesList: [],
-    moviesList: [],
-    movieDetails: {},
-    searchQuery: '',
-    movieCategory: '',
-    displayToShow: {
-      current: '',
-      previous: ''
-    }
-  },
+  state,
   mutations,
   actions
 })
