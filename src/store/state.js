@@ -1,15 +1,15 @@
 export const state = {
-  userInfo: {
-    name: '',
-    email: ''
-  },
-  favesList: [],
-  moviesList: [],
-  movieDetails: {},
-  searchQuery: '',
-  movieCategory: '',
   displayToShow: {
     current: '',
     previous: ''
+  },
+  favesList: [],
+  movieCategory: '',
+  movieDetails: {},
+  moviesList: [],
+  searchQuery: '',
+  userInfo: {
+    name: 'Bert',
+    email: 'aasd'
   }
 }
