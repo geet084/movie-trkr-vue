@@ -9,7 +9,6 @@
     tag="section"
   >
     <Star 
-      @toggleStarred="toggleStarred" 
       :isLoggedIn="userInfo.name"
       :isStarred="isStarred"
       type="cardStar"
@@ -50,9 +49,6 @@ export default {
         this.$store.dispatch('handleDetails')
         this.$store.dispatch('getMovieData', payload)
       }
-    },
-    toggleStarred(movieId) {
-      this.$emit('toggleStarred', movieId)
     }
   }
 }
