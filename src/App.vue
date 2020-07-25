@@ -26,15 +26,18 @@ export default {
     NavBar,
     MainDisplay
   },
-  data() {
-    return {
-      displayToShow: {
-        current: '',
-        previous: ''
-      },
-      favesList: [],
-      moviesList: [],
-      movieDetails: {},
+  computed: {
+    favesList() {
+      return this.$store.state.favesList
+    },
+    moviesList() {
+      return this.$store.state.moviesList
+    },
+    movieDetails() {
+      return this.$store.state.movieDetails
+    },
+    displayToShow() {
+      return this.$store.state.displayToShow
     }
   },
   mounted() {
