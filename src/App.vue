@@ -41,7 +41,10 @@ export default {
     }
   },
   mounted() {
-    this.updateCategory('now_playing')
+    const payload = { type: 'moviesList', selection: 'now_playing' }
+    
+    this.$store.dispatch('getMovieData', payload)
+    this.$store.dispatch('updateCategory', 'now_playing')
   },
   methods: {
     getMovieData(type, selection) {
