@@ -47,15 +47,6 @@ export default {
     this.$store.dispatch('updateCategory', 'now_playing')
   },
   methods: {
-    getMovieData(type, selection) {
-      const url = this.createUrl(type, selection)
-    
-      return this.$http.get(url).then(res => {
-        if (type === 'movieDetails') return res.data
-        else if (type === 'moviesList') return res.data.results
-        else if (type === 'search') return res.data.results
-      })
-    },
     createUrl(type, selection) {
       const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
       const urlPrefix = `https://api.themoviedb.org/3`
