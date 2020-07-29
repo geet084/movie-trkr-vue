@@ -47,15 +47,6 @@ export default {
     this.$store.dispatch('updateCategory', 'now_playing')
   },
   methods: {
-    createUrl(type, selection) {
-      const apiKey = process.env.VUE_APP_MOVIE_DB_API_KEY
-      const urlPrefix = `https://api.themoviedb.org/3`
-      const urlSuffix = `api_key=${apiKey}&language=en-US`
-      
-      if (type === 'movieDetails') return urlPrefix + `/movie/${selection}?` + urlSuffix
-      else if (type === 'moviesList') return urlPrefix + `/movie/${selection}?page=1&` + urlSuffix
-      else if (type === 'search') return urlPrefix + `/search/movie?query=${selection}&` + urlSuffix
-    },
     async handleMovieDetails(movieId) {
       this.updateDisplay('showDetails')
 
