@@ -6,7 +6,6 @@
       @toggleFavorites="toggleFavorites"
     />
     <MainDisplay 
-      @handleDetails="handleMovieDetails"
       @toggleStarred="toggleStarred"
       :favesList="favesList"
       :moviesList="this.displayToShow.current === 'showAll' ? moviesList : favesList" 
@@ -47,12 +46,6 @@ export default {
     this.$store.dispatch('updateCategory', 'now_playing')
   },
   methods: {
-    async handleMovieDetails(movieId) {
-      this.updateDisplay('showDetails')
-
-      if (isNaN(movieId)) this.movieDetails = {}
-      else this.movieDetails = await this.getMovieData('movieDetails', movieId)
-    },
     async handleSearch(queryStr) {
       if (queryStr !== '') this.moviesList = await this.getMovieData('search', queryStr)
       else this.updateCategory('now_playing')
